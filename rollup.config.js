@@ -7,6 +7,7 @@ import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
 import sveltePreprocess from 'svelte-preprocess';
 import alias from '@rollup/plugin-alias';
+import strip from '@rollup/plugin-strip';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -96,7 +97,13 @@ export default {
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
-		production && terser()
+		production && terser(),
+
+		// 제품단계에서 로그 제거
+		production && strip({
+			include: '**/*.(svelte|js)',
+			// functions: ['console.*', 'assert.*'] // 기본값으로 명시되어 있음
+		}),
 	],
 	watch: {
 		clearScreen: false

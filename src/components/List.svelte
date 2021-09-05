@@ -64,6 +64,8 @@
         font-size: 16px;
         margin: 0 4px;
         line-height: 20px;
+        word-break: break-all;
+        white-space: normal;
 
         :global(&.sortable-ghost) {
             position: relative;
